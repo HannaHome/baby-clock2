@@ -17,10 +17,21 @@
         }
 
         body {
-            background-color: #f7f9fb; /* 淺灰色背景 */
+            background-color: #f7f9fb; /* 淺灰色背景，作為圖片載入前的備用色 */
             /* 隱藏瀏覽器滾動條，確保沒有多餘的功能列 */
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none; /* Firefox */
+
+            /* --- 背景圖片設定開始 --- */
+            /* 1. 替換此處的 URL 為您希望使用的圖片連結。這是一個柔和的粉彩紋理圖片作為範例。 */
+            background-image: url('https://images.unsplash.com/photo-1517030303831-2794c1a5e31c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+            /* 2. 確保圖片覆蓋整個視窗 */
+            background-size: cover; 
+            /* 3. 圖片不重複平鋪 */
+            background-repeat: no-repeat; 
+            /* 4. 背景固定，捲動時不移動 */
+            background-attachment: fixed; 
+            /* --- 背景圖片設定結束 --- */
         }
         body::-webkit-scrollbar {
             display: none; /* Chrome, Safari and Opera */
@@ -43,7 +54,7 @@
             );
             /* 依據要求，外框改為灰色 (50%黑 = #808080) */
             /* 1. 調整時鐘框線寬度為 3px */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1.5px #808080 inset;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 3px #808080 inset;
         }
 
         /* 時鐘中心點 */
@@ -144,8 +155,7 @@
         /* 基礎分鐘點點 */
         .minute-dot {
             position: absolute;
-            /* 2. 微調 dot 位置，使其與 minute-num 保持一定的間距 */
-            top: 3%; /* 原 2% 調整為 3% */
+            top: 3%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 6px; /* 基礎尺寸 */
@@ -154,7 +164,7 @@
             border-radius: 50%;
         }
 
-        /* 依要求調整：每五分鐘的點點稍微大一點 (9px) */
+        /* 每五分鐘的點點 (放大且加深顏色) */
         .five-minute-dot {
             width: 9px; 
             height: 9px;
@@ -164,8 +174,7 @@
         /* 每 5 分鐘的數字標籤 */
         .minute-num {
             position: absolute;
-            /* 依要求往外擴 5% (將 top 值減小 5%) */
-            top: 7%; /* 原 9.5% 調整為 7% */
+            top: 7%; 
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 0.75rem;
@@ -181,38 +190,49 @@
 
         /* 依要求調整：電子時鐘 上午/下午 標籤樣式 (固定 14pt) */
         .period-text {
-            font-size: 14pt; /* 依要求固定為 14pt */
-            font-weight: 500; /* 比主數字細一點 */
-            color: #4b5563; /* 比主數字藍色淡一點 */
-            margin-left: 0.25rem;
+            font-size: 5px; /* 依據要求調整：切換為 px 單位，約等於 14pt */
+            font-weight: 500; 
+            color: #4b5563; 
+            margin-left: 0.3rem;
             position: relative;
-            top: -0.1em; /* 輕微上移以實現更好的視覺對齊 */
+            top: -0.1em; 
             display: inline-block;
         }
 
 
-        /* 在橫式配置下，電子時鐘文字較大 */
+        /* ---------------------------------------------------- */
+        /* 電子時鐘縮小 20% 調整區域 */
+        /* ---------------------------------------------------- */
+
+        /* 橫式配置下的時間數字 (原 4rem，縮小約 20% 到 3.2rem) */
         .landscape-digital-time {
-            font-size: 4rem; /* 放大 */
+            font-size: 3.2rem; 
         }
-        /* 依要求調整：比原始 1.8rem (28.8px) 減小為 1.5rem (24px) */
+        /* 橫式配置下的日期/星期數字 (原 1.5rem，縮小約 20% 到 1.2rem) */
         .landscape-digital-date {
-            font-size: 1.5rem; 
+            font-size: 1.2rem; 
         }
 
         /* 響應式調整：在小螢幕上調整時鐘元件的大小 */
         @media (max-width: 640px) {
-            /* 依要求調整：比原始 text-xl 減小為 text-lg (1.125rem) */
-            .digital-date-default-size { font-size: 1.125rem; } 
+            /* 直式/小螢幕下的日期/星期數字 (原 1.125rem，縮小約 20% 到 0.9rem) */
+            .digital-date-default-size { font-size: 0.9rem; } 
 
             .hour-mark-num { font-size: 1.25rem; }
             .task-label { font-size: 0.75rem; padding: 0.2rem 0.6rem; }
             .minute-dot { width: 4px; height: 4px; }
-            .five-minute-dot { width: 6px; height: 6px; } /* 在小螢幕上調整五分鐘點的大小 */
+            .five-minute-dot { width: 6px; height: 6px; } 
             .minute-num { font-size: 0.65rem; }
-            .landscape-digital-time { font-size: 3rem; }
-            .landscape-digital-date { font-size: 1.25rem; }
+
+            /* 小螢幕橫式配置下的時間數字 (原 3rem，縮小約 20% 到 2.4rem) */
+            .landscape-digital-time { font-size: 2.4rem; }
+            /* 小螢幕橫式配置下的日期/星期數字 (原 1.25rem，縮小約 20% 到 1rem) */
+            .landscape-digital-date { font-size: 1rem; }
         }
+        /* ---------------------------------------------------- */
+        /* 電子時鐘縮小 20% 調整區域 結束 */
+        /* ---------------------------------------------------- */
+
 
     </style>
 </head>
@@ -240,10 +260,10 @@
         </div>
 
         <!-- 電子時鐘區塊 - 可愛的設計風格 -->
-        <!-- 依要求將 digital-date 的預設文字大小從 text-xl 改為 text-lg (約小 10pt) -->
+        <!-- 移除 text-lg 和 text-5xl，改為使用自定義的 CSS class digital-time-default-size 進行控制，以實現 20% 縮小 -->
         <div id="digital-clock" class="mt-8 text-center transition-all duration-300 bg-white p-6 rounded-3xl shadow-xl border-4 border-pink-200">
-            <div id="digital-date" class="text-lg text-pink-600 font-semibold mb-2 landscape-digital-date"></div>
-            <div id="digital-time" class="text-5xl font-mono font-extrabold text-blue-700 landscape-digital-time"></div>
+            <div id="digital-date" class="digital-date-default-size text-pink-600 font-semibold mb-2 landscape-digital-date"></div>
+            <div id="digital-time" class="text-blue-700 font-mono font-extrabold landscape-digital-time"></div>
         </div>
     </main>
 
@@ -251,9 +271,8 @@
         // 設定 API Key，如果要在 Canvas 環境以外運行，請填寫
         const apiKey = ""; 
 
-        // 任務標籤資料 (新增了 colorClass 屬性來實現每個任務有自己的顏色)
+        // 任務標籤資料
         const tasks = [
-            // 角度是標籤中心點的位置
             { emoji: '🌞', label: '起床', angle: 30, colorClass: 'bg-red-400', cssClass: 'task-label' },
             { emoji: '👕📚', label: '穿衣服<br>整理書包', angle: 115, colorClass: 'bg-blue-400', cssClass: 'task-label' },
             { emoji: '🍞', label: '吃早餐', angle: 190, colorClass: 'bg-yellow-500', cssClass: 'task-label' },
@@ -282,22 +301,12 @@
 
         /**
          * 根據提供的角度和半徑，計算元素在時鐘上的 (x, y) 座標。
-         * 角度從 12 點鐘位置開始，順時針計算。
-         * @param {number} angle - 角度 (0-360)
-         * @param {number} radius - 半徑 (0-0.5，佔時鐘寬度的一半)
-         * @returns {{x: number, y: number}} 相對於時鐘中心的偏移量 (px)
          */
         function getCoords(angle, radius) {
-            // 將角度轉換為弧度 (從 12 點鐘位置開始，順時針)
-            // 由於 CSS 座標系 (Y 軸向下為正)，我們將 0 度設定在 12 點鐘方向。
-            // 在標準數學座標中，0 度在 3 點鐘方向，因此需要將角度減去 90 度進行調整。
             const rad = (angle - 90) * (Math.PI / 180); 
             const clockSize = analogClock.offsetWidth;
             const R = clockSize * radius;
             
-            // 計算相對於中心點的偏移量
-            // X: R * cos(rad)
-            // Y: R * sin(rad)
             const centerX = clockSize / 2;
             const centerY = clockSize / 2;
 
@@ -310,18 +319,14 @@
         /** 繪製小時數字刻度 (1-12) */
         function createHourNumbers() {
             hourNumbersEl.innerHTML = '';
-            // 依要求調整：時鐘寬度的 52% 作為半徑，數字在圓的框線在外擴10%
             const radius = 0.52; 
 
             for (let h = 1; h <= 12; h++) {
-                // 每小時的角度：360 / 12 = 30 度
-                // 注意：這裡使用 h * 30，因為我們希望 1 點鐘在 30 度位置
                 let angle = h * 30;
                 let { x, y } = getCoords(angle, radius);
 
                 const numEl = document.createElement('div');
                 numEl.className = 'hour-mark-num';
-                // 顯示 12 小時制數字
                 numEl.textContent = h;
                 numEl.style.left = `${x}px`;
                 numEl.style.top = `${y}px`;
@@ -332,24 +337,18 @@
         /** 繪製分鐘刻度 (點和數字) */
         function createMinuteMarks() {
             minuteMarksEl.innerHTML = '';
-            // 每個刻度的角度：360 / 60 = 6 度
             for (let m = 0; m < 60; m++) {
                 const angle = m * 6;
                 const isFiveMinute = m % 5 === 0;
                 
-                // 為了讓刻度在邊緣附近，我們使用一個旋轉的父元素
                 const markContainer = document.createElement('div');
                 markContainer.className = 'minute-mark';
-                // 旋轉整個容器
                 markContainer.style.transform = `rotate(${angle}deg)`;
-                // 設定一個 CSS 變數來幫助在子元素中反轉文字旋轉
                 markContainer.style.setProperty('--current-rotation', `${angle}deg`);
                 
-                // 2. 所有刻度 (包括 5 分鐘刻度) 都要有 dot
                 const minuteDot = document.createElement('div');
                 minuteDot.className = 'minute-dot';
 
-                // 針對每五分鐘的點，添加特殊 class 讓它變大
                 if (isFiveMinute) {
                     minuteDot.classList.add('five-minute-dot');
                 }
@@ -357,12 +356,10 @@
                 markContainer.appendChild(minuteDot);
 
                 if (isFiveMinute) {
-                    // 每五分鐘顯示數字 (除了 0 分鐘)
                     if (m !== 0) { 
                         const minuteNum = document.createElement('div');
                         minuteNum.className = 'minute-num';
                         minuteNum.textContent = m;
-                        // 讓文字反向旋轉 (在 style 區塊中定義)
                         markContainer.appendChild(minuteNum);
                     }
                 } 
@@ -374,7 +371,6 @@
         /** 繪製任務標籤 */
         function createTaskLabels() {
             taskLabelsEl.innerHTML = '';
-            // 依要求調整：任務標籤往圓心內縮 50% (原半徑 0.46 / 2 = 0.23)
             const radius = 0.23; 
 
             tasks.forEach(task => {
@@ -382,16 +378,12 @@
                 let { x, y } = getCoords(angle, radius);
 
                 const labelEl = document.createElement('div');
-                // 將 task-label 基礎樣式和 Tailwind 顏色類別結合
                 labelEl.className = `${task.cssClass} ${colorClass}`;
                 
-                // 標籤內容: 表情符號 + 換行 + 說明文字
                 labelEl.innerHTML = `${emoji} ${label}`;
 
-                // 定位標籤
                 labelEl.style.left = `${x}px`;
                 labelEl.style.top = `${y}px`;
-                // 使用 translate(-50%, -50%) 將標籤中心對準 (x, y) 座標
                 labelEl.style.transform = `translate(-50%, -50%)`;
 
                 taskLabelsEl.appendChild(labelEl);
@@ -445,16 +437,14 @@
                 second: '2-digit', 
                 hour12: true 
             };
-            // 確保輸出格式是 HH:MM:SS 上午/下午
             let timeStr = now.toLocaleTimeString('zh-TW', timeOptions);
             
-            // ** 調整：將時間和 上午/下午 標記分開，以便單獨設置樣式 **
+            // 調整：將時間和 上午/下午 標記分開，以便單獨設置樣式
             const parts = timeStr.split(' ');
             let timeDigits = '';
             let periodText = '';
 
             if (parts.length === 2) {
-                // 判斷哪個部分是時間數字 (包含 ':')
                 if (parts[0].includes(':')) {
                     timeDigits = parts[0];
                     periodText = parts[1];
@@ -463,7 +453,6 @@
                     timeDigits = parts[1];
                 }
             } else {
-                // 如果格式不符合預期 (例如沒有空格)，則保持原樣
                 timeDigits = timeStr;
                 periodText = '';
             }
