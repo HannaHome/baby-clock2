@@ -11,8 +11,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap');
         :root {
             --clock-size: 80vh; /* 預設時鐘大小，會在 JS 中根據方向調整 */
-            --primary-color: #3b82f6; /* 藍色，主色調 */
-            --cute-bg-color: #ffe0f0; /* 可愛粉色背景 */
+            --primary-color: #3B82F6; /* 藍色，主色調 */
+            --cute-bg-color: #FFE0F0; /* 可愛粉色背景 */
             font-family: 'Noto Sans TC', 'Inter', sans-serif;
         }
 
@@ -24,7 +24,7 @@
 
             /* --- 背景圖片設定開始 --- */
             /* 1. 替換此處的 URL 為您希望使用的圖片連結。這是一個柔和的粉彩紋理圖片作為範例。 */
-            /* background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://hannahome.github.io/baby-clock2/background.jpg'); 
+            /* background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://hannahome.github.io/baby-clock2/background.jpg'); */
             /* 2. 確保圖片覆蓋整個視窗 */
             background-size: cover; 
             /* 3. 圖片不重複平鋪 */
@@ -45,15 +45,16 @@
             border-radius: 50%;
             /* 實現用戶要求的 Conic Gradient 背景分段 */
             background: conic-gradient(
-                #ffd6e8 0deg 60deg,      /* 起床: 粉紅 */
-                #d6eaff 60deg 150deg,     /* 穿衣服/書包: 淺藍 */
-                #ffecc7 150deg 240deg,     /* 吃早餐: 淺黃/橘 */
-                #e5ffd6 240deg 270deg,     /* 整理餐桌: 淺綠 */
-                #e8d6ff 270deg 300deg,     /* 穿鞋子: 淺紫 */
+                #FFD6E8 0deg 60deg,      /* 起床: 粉紅 */
+                #D6EAFF 60deg 150deg,     /* 穿衣服/書包: 淺藍 */
+                #FFECC7 150deg 240deg,     /* 吃早餐: 淺黃/橘 */
+                #E5FFD6 240deg 270deg,     /* 整理餐桌: 淺綠 */
+                #E8D6FF 270deg 300deg,     /* 穿鞋子: 淺紫 */
                 #C7E0B4 300deg 360deg      /* 出門: 灰綠 */
             );
             /* 依據要求，外框改為灰色 (50%黑 = #808080) */
             /* 1. 調整時鐘框線寬度為 3px */
+            /* 陰影保持使用 rgba，因為它是功能性的，且不涉及主要顏色設定 */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 3px #808080 inset;
         }
 
@@ -100,7 +101,7 @@
         .second-hand {
             width: 0.5%;
             height: 45%;
-            background-color: #ef4444; /* 紅色 */
+            background-color: #EF4444; /* 紅色 */
             transform: translate(-50%, 0) rotate(0deg);
         }
 
@@ -132,14 +133,14 @@
             position: absolute;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1e293b;
+            color: #1E293B;
             transform: translate(-50%, -50%); /* 居中定位 */
-            /* 依據要求新增：白色半透明底色和圓角 */
-            background-color: rgba(255, 255, 255, 0.2); /* 20% 透明度白色 */
+            /* 依據要求新增：白色半透明底色和圓角，已轉換為 8 位數 16 進位碼 */
+            background-color: #FFFFFF33; /* 白色 (FF FF FF) + 20% 透明度 (33) */
             backdrop-filter: blur(3px); /* 輕微模糊背景，增加可讀性 */
             padding: 0.25rem 0.5rem; 
             border-radius: 9999px; 
-            border: 1px solid rgba(255, 255, 255, 0.4); /* 增加一個輕微邊框 */
+            border: 1px solid #FFFFFF66; /* 白色 (FF FF FF) + 40% 透明度 (66) */
         }
 
         /* 分鐘刻度線/數字 */
@@ -160,7 +161,7 @@
             transform: translate(-50%, -50%);
             width: 6px; /* 基礎尺寸 */
             height: 6px; /* 基礎尺寸 */
-            background-color: #94a3b8; /* 淺灰色 */
+            background-color: #94A3B8; /* 淺灰色 */
             border-radius: 50%;
         }
 
@@ -178,7 +179,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 0.75rem;
-            color: #64748b;
+            color: #64748B;
             font-weight: 500;
         }
 
@@ -188,11 +189,11 @@
             transform: translate(-50%, -50%) rotate(calc(var(--current-rotation) * -1));
         }
 
-        /* 依要求調整：電子時鐘 上午/下午 標籤樣式 (固定 14pt) */
+        /* 依要求調整：電子時鐘 上午/下午 標籤樣式 (固定 5px) */
         .period-text {
             font-size: 5px; /* 依據要求調整：切換為 px 單位，約等於 14pt */
             font-weight: 500; 
-            color: #4b5563; 
+            color: #4B5563; 
             margin-left: 0.3rem;
             position: relative;
             top: -0.1em; 
@@ -203,6 +204,28 @@
         /* ---------------------------------------------------- */
         /* 電子時鐘縮小 20% 調整區域 */
         /* ---------------------------------------------------- */
+        
+        /* 新增：花朵邊框效果 - 取代原本的 Tailwind 邊框樣式 */
+        #digital-clock {
+            background-color: #FFFFFF; 
+            padding: 1.5rem; /* 模擬 p-6 */
+            border-radius: 2rem; /* 稍微加大圓角，模擬 rounded-3xl */
+            
+            /* 創建多層次，可愛的花朵/波浪邊框效果 (使用 box-shadow) */
+            box-shadow: 
+                /* 內層陰影 (模擬 shadow-xl) */
+                0 10px 20px rgba(0, 0, 0, 0.1), 
+                /* 第一層花瓣色 (淺粉紅) */
+                0 0 0 10px #FBCEE8, /* pink-200 */
+                /* 第二層花瓣色 (柔和黃) */
+                0 0 0 15px #FEF9C3, /* yellow-100 */
+                /* 第三層花瓣色 (深粉紅) */
+                0 0 0 20px #F472B6, /* pink-400 */
+                /* 外層柔和光暈 (轉換為 8 位數 16 進位碼) */
+                0 0 15px 25px #C7D6FF; 
+            
+            transition: all 0.5s ease-in-out;
+        }
 
         /* 橫式配置下的時間數字 (原 4rem，縮小約 20% 到 3.2rem) */
         .landscape-digital-time {
@@ -260,8 +283,8 @@
         </div>
 
         <!-- 電子時鐘區塊 - 可愛的設計風格 -->
-        <!-- 移除 text-lg 和 text-5xl，改為使用自定義的 CSS class digital-time-default-size 進行控制，以實現 20% 縮小 -->
-        <div id="digital-clock" class="mt-8 text-center transition-all duration-300 bg-white p-6 rounded-3xl shadow-xl border-4 border-pink-200">
+        <!-- 移除了 bg-white p-6 rounded-3xl shadow-xl border-4 border-pink-200，改由 CSS 處理 -->
+        <div id="digital-clock" class="mt-8 text-center transition-all duration-300">
             <div id="digital-date" class="digital-date-default-size text-pink-600 font-semibold mb-2 landscape-digital-date"></div>
             <div id="digital-time" class="text-blue-700 font-mono font-extrabold landscape-digital-time"></div>
         </div>
@@ -273,12 +296,12 @@
 
         // 任務標籤資料
         const tasks = [
-            { emoji: '🌞', label: '起床', angle: 30, colorClass: 'bg-red-400', cssClass: 'task-label' },
-            { emoji: '👕📚', label: '<br>穿衣服<br>整理書包', angle: 115, colorClass: 'bg-blue-400', cssClass: 'task-label' },
-            { emoji: '🍞', label: '吃早餐', angle: 190, colorClass: 'bg-yellow-500', cssClass: 'task-label' },
-            { emoji: '🧻', label: '整理餐桌<br>擦手擦嘴', angle: 255, colorClass: 'bg-green-500', cssClass: 'task-label' },
-            { emoji: '👟', label: '穿鞋子', angle: 285, colorClass: 'bg-purple-500', cssClass: 'task-label' },
-            { emoji: '🚗', label: '出門', angle: 330, colorClass: 'bg-lime-600', cssClass: 'task-label' }
+            { emoji: '🌞', label: '起床', angle: 30, bgColor: '#F87171', cssClass: 'task-label' },
+            { emoji: '👕📚', label: '<br>穿衣服<br>整理書包', angle: 115, bgColor: '#60A5FA', cssClass: 'task-label' },
+            { emoji: '🍞', label: '吃早餐', angle: 190, bgColor: '#F59E0B', cssClass: 'task-label' },
+            { emoji: '🧻', label: '整理餐桌<br>擦手擦嘴', angle: 255, bgColor: '#22C55E', cssClass: 'task-label' },
+            { emoji: '👟', label: '穿鞋子', angle: 285, bgColor: '#A855F7', cssClass: 'task-label' },
+            { emoji: '🚗', label: '出門', angle: 330, bgColor: '#65A30D', cssClass: 'task-label' }
         ];
 
         // DOM 元素參考
@@ -374,11 +397,15 @@
             const radius = 0.23; 
 
             tasks.forEach(task => {
-                const { angle, label, emoji, colorClass } = task;
+                // 修改：現在使用 bgColor 屬性
+                const { angle, label, emoji, bgColor } = task;
                 let { x, y } = getCoords(angle, radius);
 
                 const labelEl = document.createElement('div');
-                labelEl.className = `${task.cssClass} ${colorClass}`;
+                // 修改：只保留基礎 class (task-label)
+                labelEl.className = task.cssClass;
+                // 新增：直接設定背景顏色為 16 進位碼
+                labelEl.style.backgroundColor = bgColor;
                 
                 labelEl.innerHTML = `${emoji} ${label}`;
 
@@ -532,9 +559,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
