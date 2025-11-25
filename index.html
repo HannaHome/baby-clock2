@@ -24,12 +24,21 @@
 
             /* --- 背景圖片設定開始 --- */
             /* 1. 替換此處的 URL 為您希望使用的圖片連結。這是一個柔和的粉彩紋理圖片作為範例。 */
-            /* background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://hannahome.github.io/baby-clock2/background.jpg'); */
-            /* 2. 確保圖片覆蓋整個視窗 */
-            background-size: cover; 
-            /* 3. 圖片不重複平鋪 */
+            background-image: linear-gradient(#FFFFFFA3, #FFFFFFA3), url('https://hannahome.github.io/baby-clock2/background-flower.png'); 
+            /* 2. 設定圖片尺寸與延展 (background-size)
+                  - cover: 確保圖片覆蓋整個視窗 (可能會裁切)
+                  - contain: 確保圖片完整顯示 (不會裁切，但可能留空)
+                  - 100% 100%: 強制圖片拉伸至滿版 (可能會變形)
+            */
+            background-size: repeat; 
+            /* 3. 設定圖片是否重複 (background-repeat)
+                  - no-repeat: 不重複 (單一圖片)
+                  - repeat: 水平和垂直重複平鋪
+                  - repeat-x: 僅水平重複
+                  - repeat-y: 僅垂直重複
+            */
             background-repeat: no-repeat; 
-            /* 4. 背景固定，捲動時不移動 */
+            /* 4. 背景固定，捲動時不移動 (維持 fixed 以確保時鐘穩定) */
             background-attachment: fixed; 
             /* --- 背景圖片設定結束 --- */
         }
@@ -222,7 +231,7 @@
                 /* 第三層花瓣色 (深粉紅) */
                 0 0 0 20px #F472B6, /* pink-400 */
                 /* 外層柔和光暈 (轉換為 8 位數 16 進位碼) */
-                0 0 15px 25px #C7D6FF; 
+                0 0 15px 25px #FDE68A80; /* yellow-200 with blur and 50% opacity */
             
             transition: all 0.5s ease-in-out;
         }
@@ -292,7 +301,7 @@
 
     <script>
         // 設定 API Key，如果要在 Canvas 環境以外運行，請填寫
-        const apiKey = "$2a$10$Ud6ejIFrOHIeYjhVKcVE5.PG9rQKTWbsvFd0RuYmxubPyt2bjV5yS"; 
+        const apiKey = "$2a$10$Ud6ejIFrOHIeYjhVKcVE5.PG9rQKTWbsfFd0RuYmxubPyt2bjV5yS"; 
 
         // 任務標籤資料
         const tasks = [
