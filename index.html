@@ -12,7 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 設定字體為 Noto Sans TC 以確保繁體中文的良好顯示，並使用 Inter 作為英數字體的備選 */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght300;400;700&display=swap');
         :root {
             --clock-size: 80vh; /* 預設時鐘大小，會在 JS 中根據方向調整 */
             --primary-color: #3B82F6; /* 藍色，主色調 */
@@ -33,9 +33,9 @@
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none; /* Firefox */
 
-            /* --- 背景圖片設定開始 --- */
+            /* --- 背景圖片設定開始 (已根據您的要求更新) --- */
             /* 1. 替換此處的 URL 為您希望使用的圖片連結。這是一個柔和的粉彩紋理圖片作為範例。 */
-            background-image: linear-gradient(#FFFFFFA3, #FFFFFFA3), url('https://hannahome.github.io/baby-clock2/background-flower.png'); */
+            background-image: linear-gradient(#FFFFFFA3, #FFFFFFA3), url('https://hannahome.github.io/baby-clock2/background-flower.png'); 
             /* 2. 設定圖片尺寸與延展 (background-size)
                   - cover: 確保圖片覆蓋整個視窗 (可能會裁切)
                   - contain: 確保圖片完整顯示 (不會裁切，但可能留空)
@@ -48,7 +48,7 @@
                   - repeat-x: 僅水平重複
                   - repeat-y: 僅垂直重複
             */
-            background-repeat: repeat; 
+            background-repeat: repeat; /* 設定為重複平鋪 */
             /* 4. 背景固定，捲動時不移動 (維持 fixed 以確保時鐘穩定) */
             background-attachment: fixed; 
             /* --- 背景圖片設定結束 --- */
@@ -99,6 +99,9 @@
             transform-origin: center bottom;
             border-radius: 5px;
             z-index: 50;
+            /* FIX: 強制硬體加速，防止移動時產生殘影/累積變黑 */
+            backface-visibility: hidden; 
+            will-change: transform;
         }
 
         /* 時針 */
@@ -125,10 +128,11 @@
             transform: translate(-50%, 0) rotate(0deg);
         }
 
-        /* 任務標籤基礎樣式：移除固定顏色，交給 JS 設置 Tailwind class */
+        /* 任務標籤基礎樣式 */
         .task-label {
             position: absolute;
-            color: white;
+            /* 變更：文字顏色改為深灰色，增強對比 */
+            color: #111827; 
             padding: 0.35rem 1rem; /* 稍微放大標籤 */
             border-radius: 9999px; /* 圓角 */
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
@@ -138,8 +142,8 @@
             z-index: 70;
             font-size: 0.85rem;
             transition: transform 0.3s ease; /* 增加過渡效果 */
-            /* 3. 任務標籤半透明 (30% 透明度 = 70% 不透明度) */
-            opacity: 0.7;
+            /* 變更：不透明度提高到 1，確保文字清晰 */
+            opacity: 1; 
         }
         
         /* 懸停或點擊時放大 */
@@ -222,27 +226,27 @@
 
 
         /* ---------------------------------------------------- */
-        /* 電子時鐘縮小 20% 調整區域 */
+        /* 電子時鐘縮小調整區域 (已應用) */
         /* ---------------------------------------------------- */
         
         /* 新增：花朵邊框效果 - 取代原本的 Tailwind 邊框樣式 */
         #digital-clock {
             background-color: #FFFFFF; 
-            padding: 1.5rem; /* 模擬 p-6 */
+            padding: 1rem; /* 縮小 Padding: 從 1.5rem 縮小到 1rem */
             border-radius: 2rem; /* 稍微加大圓角，模擬 rounded-3xl */
             
             /* 創建多層次，可愛的花朵/波浪邊框效果 (使用 box-shadow) */
             box-shadow: 
                 /* 內層陰影 (模擬 shadow-xl) */
                 0 10px 20px rgba(0, 0, 0, 0.1), 
-                /* 第一層花瓣色 (淺粉紅) */
-                0 0 0 10px #FBCEE8, /* pink-200 */
-                /* 第二層花瓣色 (柔和黃) */
-                0 0 0 15px #FEF9C3, /* yellow-100 */
-                /* 第三層花瓣色 (深粉紅) */
-                0 0 0 20px #F472B6, /* pink-400 */
-                /* 外層柔和光暈 (轉換為 8 位數 16 進位碼) */
-                0 0 15px 25px #FDE68A80; /* yellow-200 with blur and 50% opacity */
+                /* 第一層花瓣色 (淺粉紅) - 縮小 */
+                0 0 0 6px #FBCEE8, /* pink-200 */
+                /* 第二層花瓣色 (柔和黃) - 縮小 */
+                0 0 0 9px #FEF9C3, /* yellow-100 */
+                /* 第三層花瓣色 (深粉紅) - 縮小 */
+                0 0 0 12px #F472B6, /* pink-400 */
+                /* 外層柔和光暈 - 縮小 */
+                0 0 10px 15px #FDE68A80; /* yellow-200 with blur and 50% opacity */
             
             transition: all 0.5s ease-in-out;
         }
@@ -273,7 +277,7 @@
             .landscape-digital-date { font-size: 1rem; }
         }
         /* ---------------------------------------------------- */
-        /* 電子時鐘縮小 20% 調整區域 結束 */
+        /* 電子時鐘縮小調整區域 結束 */
         /* ---------------------------------------------------- */
 
 
