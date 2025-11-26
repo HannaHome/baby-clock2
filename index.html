@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 針對 Apple 裝置，讓網頁在加入主畫面後以全螢幕模式啟動 (隱藏地址列/瀏覽器介面) -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- 設定狀態列的風格，讓內容延展到狀態列下方 -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- 針對 Apple 裝置，讓網頁在加入主畫面後以全螢幕模式啟動 (隱藏地址列/瀏覽器介面) --><meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 設定狀態列的風格，讓內容延展到狀態列下方 --><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>寶寶作息時鐘</title>
-    <!-- 載入 Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 設定字體為 Noto Sans TC 以確保繁體中文的良好顯示，並使用 Inter 作為英數字體的備選 */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght300;400;700&display=swap');
@@ -75,7 +72,7 @@
             );
             /* 依據要求，外框改為灰色 (50%黑 = #808080) */
             /* 1. 調整時鐘框線寬度為 3px */
-            /* 陰影保持使用 rgba，因為它是功能性的，且不涉及主要顏色設定 */
+            /* 陰影保持使用 rgba因為它是功能性的，且不涉及主要顏色設定 */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 3px #808080 inset;
         }
 
@@ -281,35 +278,141 @@
         /* 電子時鐘縮小調整區域 結束 */
         /* ---------------------------------------------------- */
 
+        /* ---------------------------------------------------- */
+        /* 新增：時鐘人臉部、四肢與頭髮樣式 */
+        /* ---------------------------------------------------- */
+        /* 眼睛 */
+        .clock-eye {
+            position: absolute;
+            width: 8%; /* 相對於時鐘寬度 */
+            height: 8%;
+            background-color: #1a202c; /* 深色 */
+            border-radius: 50%;
+            z-index: 90;
+            top: 30%; /* 距離時鐘頂部 */
+            transform: translateY(-50%);
+        }
+        .clock-eye.left {
+            left: 35%; /* 左眼位置 */
+        }
+        .clock-eye.right {
+            left: 65%; /* 右眼位置 */
+        }
+
+        /* 嘴巴 */
+        .clock-mouth {
+            position: absolute;
+            width: 20%;
+            height: 10%;
+            background-color: transparent;
+            border: 4px solid #1a202c; /* 深色邊框 */
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 50% 100%; /* 下半圓形 */
+            border-bottom-right-radius: 50% 100%; /* 下半圓形 */
+            z-index: 90;
+            top: 55%; /* 距離時鐘頂部 */
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg); /* 初始居中 */
+            border-top: none; /* 移除上邊框 */
+        }
+
+        /* 手 */
+        .clock-hand-arm {
+            position: absolute;
+            width: 15%; /* 粗細 */
+            height: 40%; /* 長度 */
+            background-color: #FFC0CB; /* 可愛粉色 */
+            border-radius: 50%;
+            z-index: 60;
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg);
+            transform-origin: center center; /* 以自身中心旋轉 */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .clock-hand-arm.left {
+            left: -10%; /* 從左側伸出 */
+            transform: translateY(-50%) rotate(-30deg); /* 稍微向上彎曲 */
+        }
+        .clock-hand-arm.right {
+            right: -10%; /* 從右側伸出 */
+            transform: translateY(-50%) rotate(30deg); /* 稍微向上彎曲 */
+        }
+
+        /* 腳 */
+        .clock-foot {
+            position: absolute;
+            width: 20%; /* 寬度 */
+            height: 15%; /* 高度 */
+            background-color: #FFC0CB; /* 可愛粉色 */
+            border-radius: 50%;
+            z-index: 60;
+            top: 95%; /* 從底部伸出 */
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .clock-foot.left {
+            left: 40%; /* 左腳位置 */
+            transform: translateX(-50%) rotate(-10deg);
+        }
+        .clock-foot.right {
+            left: 60%; /* 右腳位置 */
+            transform: translateX(-50%) rotate(10deg);
+        }
+
+        /* 頭髮 (多個小彎曲觸角) */
+        .clock-hair {
+            position: absolute;
+            background-color: #FFC0CB; /* 可愛粉色 */
+            border-radius: 50%;
+            z-index: 60;
+            top: -5%; /* 距離時鐘頂部 */
+            transform: translateX(-50%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .clock-hair.one {
+            width: 10%; height: 15%; left: 35%; transform: translateX(-50%) rotate(-20deg);
+        }
+        .clock-hair.two {
+            width: 12%; height: 18%; left: 50%; transform: translateX(-50%) rotate(0deg);
+        }
+        .clock-hair.three {
+            width: 10%; height: 15%; left: 65%; transform: translateX(-50%) rotate(20deg);
+        }
 
     </style>
 </head>
 <body class="overflow-hidden">
 
     <main id="app-container" class="min-h-screen flex flex-col justify-center items-center p-4 transition-all duration-300">
-        <!-- 傳統時鐘區塊 -->
-        <div id="analog-clock-wrapper" class="flex justify-center items-center">
+        <!-- 傳統時鐘區塊 --><div id="analog-clock-wrapper" class="flex justify-center items-center">
             <div id="analog-clock" class="analog-clock-container relative">
-                <!-- 12個小時刻度數字 -->
-                <div id="hour-numbers"></div>
-                <!-- 60個分鐘刻度 -->
-                <div id="minute-marks"></div>
-                <!-- 任務標籤 -->
-                <div id="task-labels"></div>
+                <!-- 時鐘的臉部特徵 --><div class="clock-eye left"></div>
+                <div class="clock-eye right"></div>
+                <div class="clock-mouth"></div>
 
-                <!-- 指針 -->
-                <div id="hour-hand" class="hand hour-hand"></div>
+                <!-- 時鐘的四肢 --><div class="clock-hand-arm left"></div>
+                <div class="clock-hand-arm right"></div>
+                <div class="clock-foot left"></div>
+                <div class="clock-foot right"></div>
+
+                <!-- 時鐘的頭髮 --><div class="clock-hair one"></div>
+                <div class="clock-hair two"></div>
+                <div class="clock-hair three"></div>
+
+                <!-- 12個小時刻度數字 --><div id="hour-numbers"></div>
+                <!-- 60個分鐘刻度 --><div id="minute-marks"></div>
+                <!-- 任務標籤 --><div id="task-labels"></div>
+
+                <!-- 指針 --><div id="hour-hand" class="hand hour-hand"></div>
                 <div id="minute-hand" class="hand minute-hand"></div>
                 <div id="second-hand" class="hand second-hand"></div>
                 
-                <!-- 中心點 -->
-                <div class="center-dot"></div>
+                <!-- 中心點 --><div class="center-dot"></div>
             </div>
         </div>
 
-        <!-- 電子時鐘區塊 - 可愛的設計風格 -->
-        <!-- 移除了 bg-white p-6 rounded-3xl shadow-xl border-4 border-pink-200，改由 CSS 處理 -->
-        <div id="digital-clock" class="mt-8 text-center transition-all duration-300">
+        <!-- 電子時鐘區塊 - 可愛的設計風格 --><div id="digital-clock" class="mt-8 text-center transition-all duration-300">
             <div id="digital-date" class="digital-date-default-size text-pink-600 font-semibold mb-2 landscape-digital-date"></div>
             <div id="digital-time" class="text-blue-700 font-mono font-extrabold landscape-digital-time"></div>
         </div>
@@ -529,58 +632,62 @@
             
             if (isLandscape) {
                 // 橫式配置：時鐘在左，電子時鐘在右
-                appContainer.classList.add('flex-row', 'justify-center', 'gap-12', 'p-8');
+                appContainer.classList.add('flex-row', 'gap-12', 'justify-center');
+                root.style.setProperty('--clock-size', '80vh'); // 垂直空間優先
                 
-                // 時鐘大小 = 螢幕高度 (90% 作為直徑)
-                const clockSize = window.innerHeight * 0.9;
-                root.style.setProperty('--clock-size', `${clockSize}px`);
-
-                // 調整電子時鐘樣式
+                // 調整電子時鐘的定位和文字對齊
                 digitalClock.classList.add('flex', 'flex-col', 'justify-center', 'text-left');
+                digitalClock.classList.remove('mt-8', 'text-center');
+
+                // 調整時鐘在橫向模式下的頂部對齊 (稍微向上移)
+                analogClockWrapper.classList.add('self-start');
+                analogClockWrapper.classList.remove('self-center');
 
             } else {
-                // 直式配置：時鐘在上中，電子時鐘在下
-                appContainer.classList.add('flex-col', 'justify-start', 'gap-6', 'p-4');
-                
-                // 時鐘大小 = 螢幕寬度 (90% 作為直徑，最大限制在 70vh 以避免過高)
-                const clockSize = Math.min(window.innerWidth * 0.9, window.innerHeight * 0.7);
-                root.style.setProperty('--clock-size', `${clockSize}px`);
+                // 直式配置：時鐘在上，電子時鐘在下
+                appContainer.classList.add('flex-col', 'gap-6', 'justify-start');
+                // 限制時鐘大小以確保電子時鐘有足夠空間，並使用較小的垂直比例
+                root.style.setProperty('--clock-size', '60vh'); 
 
-                // 調整電子時鐘樣式
+                // 調整電子時鐘的定位和文字對齊
                 digitalClock.classList.add('mt-8', 'text-center');
+                digitalClock.classList.remove('flex', 'flex-col', 'justify-center', 'text-left');
+
+                // 調整時鐘在直向模式下的居中對齊
+                analogClockWrapper.classList.add('self-center');
+                analogClockWrapper.classList.remove('self-start');
             }
 
-            // 重新繪製刻度和標籤以適應新的時鐘尺寸
+            // 重新繪製刻度以適應新的時鐘大小
             createHourNumbers();
             createMinuteMarks();
             createTaskLabels();
         }
 
         // =======================================================
-        // 3. 初始化和事件監聽
+        // 3. 初始載入與事件監聽
         // =======================================================
-
-        // 首次運行時初始化佈局和時鐘
-        window.onload = function() {
+        
+        /** * 啟動時鐘和佈局監聽 
+         */
+        function startClock() {
+            // 初始化佈局和時鐘大小
             updateLayout(); 
+            // 立即更新一次時間
             updateAnalogClock();
             updateDigitalClock();
             
-            // 每秒更新一次指針和電子時鐘
-            setInterval(() => {
-                updateAnalogClock();
-                updateDigitalClock();
-            }, 1000);
+            // 每秒更新時鐘指針和電子時鐘
+            setInterval(updateAnalogClock, 1000);
+            setInterval(updateDigitalClock, 1000);
+        }
 
-            // 監聽視窗大小變化，以調整佈局
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                // 限制 resize 頻率以優化性能
-                resizeTimer = setTimeout(updateLayout, 200);
-            });
-        };
+        // 監聽螢幕方向/大小改變
+        window.addEventListener('resize', updateLayout);
+
+        // 頁面載入完成後啟動
+        window.onload = startClock;
+
     </script>
 </body>
-
 </html>
