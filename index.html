@@ -128,7 +128,7 @@
             font-size: 0.85rem;
             transition: transform 0.3s ease; /* 增加過渡效果 */
             /* 變更：不透明度提高到 1，確保文字清晰 */
-            opacity: 1; 
+            opacity: 0.75; 
         }
         
         /* 懸停或點擊時放大 */
@@ -281,15 +281,15 @@
                 <!-- 任務標籤 -->
                 <div id="task-labels"></div>
                 
-                <!-- 眼睛圖片容器 (帶有透明背景) - 依據使用者要求重新加入 -->
-                <!-- 關鍵設定：w-1/3 (寬度佔時鐘直徑的 33%)，top: 35% (位於上方 35% 處)，z-index: 60 (確保它在指針下方，但高於背景) -->
-                <div id="clock-face-decoration" class="absolute z-[60] w-1/3 h-1/4" style="top: 35%; left: 50%; transform: translateX(-50%);">
+                <!-- 眼睛圖片容器 (帶有透明背景) - 依據使用者要求調整為佈滿整個時鐘圓 -->
+                <!-- 關鍵設定：w-full h-full 佈滿父容器，top: 0; left: 0; 從左上角開始定位 -->
+                <div id="clock-face-decoration" class="absolute z-[60] w-full h-full top-0 left-0" style="border-radius: 50%; overflow: hidden;">
                     <!-- *** 請將此處的 src 替換為您的透明背景 PNG/SVG 圖片網址 *** -->
                     <img 
                         id="eyes-image" 
                         src="https://hannahome.github.io/baby-clock2/smile.png" 
                         alt="眼睛裝飾圖片" 
-                        class="w-full h-full object-contain"
+                        class="w-full h-full object-cover"
                         onerror="this.style.display='none'; console.log('Image failed to load, please replace the placeholder URL.');"
                     >
                 </div>
