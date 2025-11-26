@@ -128,7 +128,7 @@
             font-size: 0.85rem;
             transition: transform 0.3s ease; /* 增加過渡效果 */
             /* 變更：不透明度提高到 1，確保文字清晰 */
-            opacity: 0.75; 
+            opacity: 1; 
         }
         
         /* 懸停或點擊時放大 */
@@ -317,12 +317,12 @@
 
         // 任務標籤資料
         const tasks = [
-            { emoji: '🌞', label: '起床', angle: 30, bgColor: '#F87171', cssClass: 'task-label' },
-            { emoji: '👕📚', label: '<br>穿衣服<br>整理書包', angle: 115, bgColor: '#60A5FA', cssClass: 'task-label' },
-            { emoji: '🍞', label: '吃早餐', angle: 190, bgColor: '#F59E0B', cssClass: 'task-label' },
-            { emoji: '🧻', label: '整理餐桌<br>擦手擦嘴', angle: 255, bgColor: '#22C55E', cssClass: 'task-label' },
-            { emoji: '👟', label: '穿鞋子', angle: 285, bgColor: '#A855F7', cssClass: 'task-label' },
-            { emoji: '🚗', label: '出門', angle: 330, bgColor: '#65A30D', cssClass: 'task-label' }
+            { emoji: '🌞', label: '起床', angle: 30, cssClass: 'task-label' },
+            { emoji: '👕📚', label: '<br>穿衣服<br>整理書包', angle: 115, cssClass: 'task-label' },
+            { emoji: '🍞', label: '吃早餐', angle: 190, cssClass: 'task-label' },
+            { emoji: '🧻', label: '整理餐桌<br>擦手擦嘴', angle: 255, cssClass: 'task-label' },
+            { emoji: '👟', label: '穿鞋子', angle: 285, cssClass: 'task-label' },
+            { emoji: '🚗', label: '出門', angle: 330, cssClass: 'task-label' }
         ];
 
         // DOM 元素參考
